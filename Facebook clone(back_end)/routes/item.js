@@ -46,12 +46,19 @@ app.delete('/item', (req, res) => {
     res.send('<h2>Hello KITT</h2>');
 })
 
-app.get('/item/:id', (req, res) => {
-    console.log(req.params);
+router.get('/:id', async (req, res) => {
+    // console.log(req.params);
+
+    try{
+        const item = await Item.findById(req.params.id);
+        res.json(item);
+    }catch (err) {
+        res.send('Err: ' + err);
+    }
 });
 
-app.get('/item/:id', (req, res) => {
-    console.log(req.query);
-});
+// app.get('/item/:id', (req, res) => {
+//     console.log(req.query);
+// });
 
 module.exports = router
