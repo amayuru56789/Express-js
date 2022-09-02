@@ -2,13 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 
 // const customer = require('./routes/customer');
-// const item = require('./routes/item');
+const item = require('./routes/item');
 const user = require('./routes/user');
 const app = express();
 
 const port = 4000;
 
-const url = 'mongodb://localhost/express'
+const url = 'mongodb://127.0.0.1/express'
 
 mongoose.connect(url, { useNewUrlParser: true });
 const con = mongoose.connection
@@ -21,7 +21,7 @@ con.on("open", ()=> {
 app.use(express.json());
 
 // app.use('/customer', customer);
-// app.use('/item', item);
+app.use('/items', item);
 app.use('/users', user);
 
 app.get('/', (req, res) => {
@@ -35,10 +35,10 @@ app.post('/', (req, res) => {
 
 
 
-app.get('/item', (req, res) => {
-    //console.log('Get Request has come');
-    res.send('Hello Item!');
-});
+// app.get('/item', (req, res) => {
+//     //console.log('Get Request has come');
+//     res.send('Hello Item!');
+// });
 
 app.listen(port, (req, res) => {
     console.log(`Express app listening on port ${port}`);
