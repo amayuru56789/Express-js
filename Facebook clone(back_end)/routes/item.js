@@ -13,7 +13,8 @@ router.get('/', async (req, res) => {
 
     try{
         const item = await Item.find();
-        res.send(item);
+        res.json(item);
+        // res.send(item);
     }catch (err) {
         res.send('Err: ' + err);
     }
@@ -30,7 +31,8 @@ router.post('/', async (req, res) => {
 
     try{
         const response = item.save();
-        res.send(response);
+        res.json(response);
+        // res.send(response);
     }catch (err) {
         res.send('Err: ' + err);
     }
