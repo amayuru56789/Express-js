@@ -1,4 +1,5 @@
 const express = require('express');
+const { findById } = require('../models/item_models');
 const app = express();
 const router = express.Router()
 
@@ -53,6 +54,22 @@ router.delete('/:id', async (req, res) => {
 
     // console.log(req.query.id);
     // res.send('<h2>Hello KITT</h2>');
+})
+
+router.put('/:id', async (req, res) => {
+    try {
+        const item = await Item.findById(req.params.id);
+        item.code = req.body.code;
+        item.description = req.body.description;
+        item.price = req.body.price;
+        item.qty = req.body.qty;
+
+        const response = await item.save();
+        res.json(response);
+
+    } catch (err) {
+        res.send('Err: ' + err);
+    }
 })
 
 router.get('/:id', async (req, res) => {
