@@ -57,9 +57,18 @@ router.put('/:id', async (req, res) => {
     // res.send('put method');
 })
 
-router.delete('/:id', (req, res) => {
-    console.log(req.params.id);
-    res.send('delete method');
+router.delete('/:id', async (req, res) => {
+    // console.log(req.params.id);
+    // res.send('delete method');
+
+    try{
+        const user = await User.findById(req.params.id);
+        const response = await User.remove();
+
+        res.json(response);
+    }catch(err) {
+        res.send('Err: ' + err);
+    }
 })
 
 router.get('/:id', (req, res) => {
