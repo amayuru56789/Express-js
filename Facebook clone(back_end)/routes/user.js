@@ -38,8 +38,23 @@ router.post('/', async (req, res) => {
     // res.send('user post method');
 })
 
-router.put('/', (req, res) => {
-    res.send('put method');
+router.put('/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        user.uid = req.body.uid;
+        user.date = req.body.date;
+        user.time = req.body.time;
+        user.title = req.body.title;
+
+        const response = await user.save();
+        res.json(response);
+
+    } catch (err) {
+        res.send('Err: ' + err);
+    }
+
+
+    // res.send('put method');
 })
 
 router.delete('/:id', (req, res) => {
