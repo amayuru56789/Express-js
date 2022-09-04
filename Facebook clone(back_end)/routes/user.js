@@ -18,7 +18,22 @@ router.get('/', async (req, res) => {
     // res.send('user get');
 })
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
+    const user = new User({
+        uid: req.body.uid,
+        date: req.body.date,
+        time: req.body.time,
+        title: req.body.title
+    });
+
+    try{
+        const response = user.save();
+        res.json(response);
+        // res.send(response);
+    }catch (err) {
+        res.send('Err: ' + err);
+    }
+
     // console.log(req.body);
     // res.send('user post method');
 })
