@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 
-// const customer = require('./routes/customer');
+const customer = require('./routes/customer');
 const item = require('./routes/item');
 const user = require('./routes/user');
 const app = express();
@@ -20,7 +20,7 @@ con.on("open", ()=> {
 // if we use json object inside our app.js
 app.use(express.json());
 
-// app.use('/customer', customer);
+app.use('/customer', customer);
 app.use('/items', item);
 app.use('/users', user);
 
